@@ -1,0 +1,65 @@
+{% extends 'craseapp/base.html' %}
+{% load static %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+    <div class="card shadow-lg border-0">
+        <div class="card-header text-center">
+            <h1 class="app-title mb-0">{{ titulo }}</h1>
+        </div>
+        <div class="card-body">
+            {% if resultados_crase %}
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped table-crase align-middle">
+                        <thead>
+                            <tr>
+                                <th>Regente</th>
+                                <th>Regido</th>
+                                <th class="text-center">Exige 'a' (Regente)</th>
+                                <th class="text-center">Aceita 'a' (Regido)</th>
+                                <th>Regra Aplicada</th>
+                                <th class="text-center">Conclusão</th>
+                                <th>Exemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for resultado in resultados_crase %}
+                            <tr>
+                                <td>{{ resultado.regente_termo }}</td>
+                                <td>{{ resultado.regido_termo }}</td>
+
+                                <td class="text-center {% if resultado.exige_preposicao %}crase-sim{% else %}crase-nao{% endif %}">
+                                    {{ resultado.exige_preposicao|yesno:"SIM,NÃO" }}
+                                </td>
+                                <td class="text-center {% if resultado.aceita_artigo %}crase-sim{% else %}crase-nao{% endif %}">
+                                    {{ resultado.aceita_artigo|yesno:"SIM,NÃO" }}
+                                </td>
+
+                                <td>{{ resultado.regra_aplicada }}</td>
+
+                                <td class="text-center {% if resultado.crase_ocorre %}crase-sim{% else %}crase-nao{% endif %}">
+                                    {{ resultado.crase_ocorre|yesno:"OBRIGATÓRIA,PROIBIDA" }}
+                                </td>
+
+                                <td class="sintese">
+                                    {{ resultado.resultado_sintese|safe }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info text-center" role="alert">
+                    Nenhum mapeamento de crase encontrado. Por favor, adicione exemplos no painel Admin.
+                </div>
+            {% endif %}
+
+            <div class="app-footer text-center">
+                <a href="{% url 'consulta_dinamica' %}" class="text-decoration-none text-dark-blue fw-bold">Voltar para Consulta Dinâmica</a>
+                <p class="mt-2 mb-0">&copy; 2025 Gabriel Alencar</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

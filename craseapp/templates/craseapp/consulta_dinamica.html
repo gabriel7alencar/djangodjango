@@ -1,0 +1,107 @@
+{% extends 'craseapp/base.html' %}
+{% load static %}
+
+{% block title %}Consulta de Crase Dinâmica{% endblock %}
+
+{% block content %}
+    <div class="card shadow-lg border-0">
+        <div class="card-header text-center border-0" style="background-color: #d3d3d3;">
+            <h1 class="app-title mb-0 border-0 text-dark fw-bold">Consulta de Regras de Crase</h1>
+        </div>
+        <div class="card-body">
+
+            <div class="text-center mb-4 border-bottom pb-4">
+                <a href="{% url 'admin:index' %}" class="btn btn-outline-secondary">Gerenciar Termos (Admin)</a>
+                <a href="{% url 'validar_crase' %}" class="btn btn-outline-primary">Ver Listagem de Mapeamentos</a>
+            </div>
+            <div class="form-container mb-5">
+                <form method="post" action="" class="p-4 border rounded">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                        <div class="mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <div class="form-text">{{ field.help_text }}</div>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger mt-1">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-primary w-100">Validar Crase</button>
+                </form>
+            </div>
+
+            {% if resultado %}
+                <div class="resultado-box {% if resultado.crase_ocorre %}resultado-sim{% else %}resultado-nao{% endif %} mb-5">
+                    <h2 class="h4 border-bottom pb-2 mb-3">Resultado da Consulta</h2>
+
+                    <p class="lead">
+                        <strong class="text-dark-blue">Combinação Analisada:</strong> {{ resultado.sintese|safe }}
+                    </p>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <p class="mb-0">
+                                **Regente:** <strong class="text-dark-blue">{{ resultado.regente }}</strong> (Exige 'a': <span class="{% if resultado.preposicao_ok %}crase-sim{% else %}crase-nao{% endif %}">{{ resultado.preposicao_ok|yesno:"SIM,NÃO" }}</span>)
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-0">
+                                **Regido:** <strong class="text-dark-blue">{{ resultado.regido }}</strong> (Aceita 'a': <span class="{% if resultado.artigo_ok %}crase-sim{% else %}crase-nao{% endif %}">{{ resultado.artigo_ok|yesno:"SIM,NÃO" }}</span>)
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="conclusao mt-4">
+                        Conclusão: Crase é
+                        <span class="{% if resultado.crase_ocorre %}crase-sim{% else %}crase-nao{% endif %}">
+                            {{ resultado.crase_ocorre|yesno:"OBRIGATÓRIA,PROIBIDA" }}
+                        </span>
+                    </p>
+
+                    <small class="d-block mt-2 text-muted">
+                        Regra Encontrada: <strong class="text-dark-blue">{{ resultado.regra }}</strong>
+                    </small>
+                </div>
+            {% endif %}
+
+            <hr class="my-5">
+
+            <h2 class="h4 mb-4 text-dark-blue">Todos os Exemplos Cadastrados no Admin</h2>
+            <div class="row g-4">
+                {% for map in todos_mapeamentos %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="crase-card h-100 {% if map.crase_ocorre %}card-sim{% else %}card-nao{% endif %}">
+                            <p class="sintese-card mb-2">
+                                {{ map.regente.termo }}
+                                <span class="resultado-letra">
+                                    {% if map.crase_ocorre %}
+                                        à
+                                    {% else %}
+                                        a
+                                    {% endif %}
+                                </span>
+                                {{ map.regido.termo }}
+                            </p>
+                            <div class="detalhe pt-2 mt-2 border-top border-light">
+                                <small class="d-block">Regente exige 'a': <strong class="text-dark-blue">{{ map.regente.exige_preposicao|yesno:"Sim,Não" }}</strong></small>
+                                <small class="d-block">Regido aceita 'a': <strong class="text-dark-blue">{{ map.regido.aceita_artigo|yesno:"Sim,Não" }}</strong></small>
+                                <small class="d-block">Regra: <strong class="text-dark-blue">{{ map.regra.nome_regra }}</strong></small>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="text-muted">Nenhum mapeamento de crase cadastrado no Admin.</p>
+                {% endfor %}
+            </div>
+
+            <div class="app-footer text-center">
+                <p class="mt-2 mb-0">&copy; 2025 Gabriel Alencar</p>
+            </div>
+            </div>
+    </div>
+{% endblock %}

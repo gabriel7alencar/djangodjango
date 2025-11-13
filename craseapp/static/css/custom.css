@@ -1,0 +1,136 @@
+/* Paleta de Cores Frias */
+:root {
+    --primary-color: #007bff; /* Azul primário do Bootstrap (mantido como base) */
+    --secondary-color: #6c757d; /* Cinza secundário */
+    --info-color: #17a2b8; /* Ciano/Azul claro */
+    --dark-blue: #003366; /* Azul Escuro para títulos e textos principais */
+    --light-blue: #e6f0ff; /* Azul muito claro para fundos sutis */
+    --success-color: #28a745; /* Verde para sucesso */
+    --danger-color: #dc3545; /* Vermelho para erro */
+}
+
+/* Estilos para Aplicação Interna */
+.card {
+    border: none;
+    border-left: 5px solid var(--dark-blue); /* Destaque lateral */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    background-color: var(--light-blue);
+    color: var(--dark-blue);
+    font-weight: bold;
+    border-bottom: 1px solid var(--dark-blue);
+}
+
+/* Estilo para o Título Principal */
+.app-title {
+    color: var(--dark-blue);
+    font-weight: 300; /* Fonte mais leve para um visual moderno */
+    border-bottom: 2px solid var(--info-color);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+/* Estilos para a Tabela */
+.table-crase thead th {
+    background-color: var(--dark-blue);
+    color: white;
+    border-color: var(--dark-blue);
+}
+
+.table-crase tbody tr:nth-of-type(even) {
+    background-color: var(--light-blue);
+}
+
+/* Destaque do Resultado (SIM/NÃO) */
+.crase-sim {
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+.crase-nao {
+    color: var(--danger-color);
+    font-weight: bold;
+}
+
+/* Estilos para o Formulário */
+.form-control:focus {
+    border-color: var(--info-color);
+    box-shadow: 0 0 0 0.25rem rgba(23, 162, 184, 0.25); /* Sombra do info-color */
+}
+
+/* Estilos para os Cards de Exemplo */
+.crase-card {
+    border-left: 5px solid;
+    padding: 15px;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: transform 0.2s;
+}
+
+.crase-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.card-sim {
+    border-color: var(--success-color);
+    background-color: #f1fff3; /* Fundo muito claro para SIM */
+}
+
+.card-nao {
+    border-color: var(--danger-color);
+    background-color: #fff1f1; /* Fundo muito claro para NÃO */
+}
+
+.resultado-letra {
+    color: var(--dark-blue);
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+.sintese-card {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--dark-blue);
+}
+
+/* Resultado da Consulta Dinâmica (Caixa de Destaque) */
+.resultado-box {
+    border: 2px solid;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 0.5rem;
+    font-size: 1.1em;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+}
+
+.resultado-sim {
+    border-color: var(--success-color);
+    background-color: #e6ffe6;
+}
+
+.resultado-nao {
+    border-color: var(--danger-color);
+    background-color: #ffe6e6;
+}
+
+.conclusao {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.conclusao span {
+    font-weight: 700;
+}
+
+/* Rodapé */
+.app-footer {
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+    margin-top: 40px;
+    color: var(--secondary-color);
+    font-size: 0.85em;
+}
