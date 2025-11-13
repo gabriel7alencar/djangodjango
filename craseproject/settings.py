@@ -66,8 +66,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Motor do MariaDB/MySQL
         'NAME': 'djangodjango',                  # O nome do SEU banco no Workbench
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'jules',
+        'PASSWORD': 'password',
         'HOST': 'localhost',                  # Geralmente 127.0.0.1
         'PORT': '3306',                       # Porta padrão do MySQL/MariaDB
         'OPTIONS': {
