@@ -19,29 +19,35 @@ O projeto foi construído utilizando as seguintes tecnologias principais:
 
 O projeto segue a estrutura padrão do Django, com algumas configurações específicas:
 
-djangodjango/
-├── craseapp/             # Aplicação principal (App)
-│   ├── migrations/
-│   ├── templates/
-│   │   └── craseapp/     # Templates HTML específicos da aplicação
+djangodjango
+├── README.md
+├── craseapp
 │   ├── init.py
-│   ├── admin.py          # Configuração do painel administrativo
+│   ├── admin.py
 │   ├── apps.py
-│   ├── forms.py          # Definição do formulário de consulta
-│   ├── models.py         # Definição dos modelos (TermoRegente, TermoRegido, MapeamentoCrase, Regra)
+│   ├── forms.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   └── init.py
+│   ├── models.py
+│   ├── static
+│   │   └── css
+│   │       └── custom.css
+│   ├── templates
+│   │   └── craseapp
+│   │       ├── base.html
+│   │       ├── consulta_dinamica.html
+│   │       └── validacao_crase.html
 │   ├── tests.py
-│   ├── urls.py           # Rotas da aplicação
-│   └── views.py          # Lógica de negócio (Validação e Consulta Dinâmica)
-├── craseproject/         # Configurações do Projeto (Project)
+│   ├── urls.py
+│   └── views.py
+├── craseproject
 │   ├── init.py
 │   ├── asgi.py
-│   ├── settings.py       # Configurações principais (DB, Apps, Templates, Static)
-│   ├── urls.py           # Rotas globais do projeto
+│   ├── settings.py
+│   ├── urls.py
 │   └── wsgi.py
-├── manage.py             # Utilitário de linha de comando do Django
-└── static/               # Arquivos estáticos globais (ex: styles.css)
-└── styles.css
-Plain Text
+└── manage.py
 
 ## ⚙️ Como Foi Feito (Instruções de Configuração)
 
